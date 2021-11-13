@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Test from "./components/Test";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import Firestore from "./api/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -20,9 +21,17 @@ const firebaseConfig = {
 };
 
 function App() {
-  // Initialize Firebase
+  const [user, setUser] = useState();
+
+  const loadUsers = async () => {
+    const fireStore = new Firestore();
+    setUser(await fireStore.getUser());
+  };
+
   useEffect(() => {
+    // Initialize Firebase
     initializeApp(firebaseConfig);
+    loadUsers();
   }, []);
 
   return (
@@ -30,6 +39,7 @@ function App() {
       <Switch>
         <Route path="/">
           <Test />
+          {user && <p>{user.displayname}</p>}
         </Route>
       </Switch>
     </Router>
