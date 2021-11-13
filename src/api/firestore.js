@@ -1,4 +1,11 @@
-import { getDocs, getDoc, getFirestore, collection } from "firebase/firestore";
+import {
+  getDocs,
+  getDoc,
+  getFirestore,
+  collection,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 
 class Firestore {
   db;
@@ -20,6 +27,11 @@ class Firestore {
     const userSnapshot = await this.getUsers();
     console.warn(userSnapshot);
     return userSnapshot[0];
+  }
+
+  async updateUser(u) {
+    const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
+    await updateDoc(userRef, u);
   }
 }
 
