@@ -162,7 +162,7 @@ function PetCanvas(props) {
     // Check if all plants already matured or non-existent
     const immaturePlants = plants.filter((plant) => plant.growth !== 2);
 
-    const shouldAddPlant = immaturePlants.length === 0 || Math.random() > 0.5;
+    const shouldAddPlant = immaturePlants.length === 0 || Math.random() > 0.7;
     if (shouldAddPlant) {
       setPlants((prevPlants) => {
         const x = window.innerWidth / 2 + (window.innerWidth / 3) * (Math.random() * 2 - 1);
