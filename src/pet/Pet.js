@@ -20,7 +20,9 @@ class Pet {
         min: 30,
         max: 300,
         currentMax: 100,
-        nextActions: ["walk", "hop"],
+        nextActions() {
+          return this.listNextActions(["walk"], ["hop"]);
+        },
       },
       walk: {
         action: "walk",
@@ -28,12 +30,8 @@ class Pet {
         min: 30,
         max: 100,
         currentMax: 60,
-        nextActions(actionData) {
-          if (this.mood === "happy") {
-            return Math.random() > 0.5 ? "hop" : "idle";
-          } else {
-            return "idle";
-          }
+        nextActions() {
+          return this.listNextActions(["idle"], ["hop"]);
         },
         currentData: {
           direction: 1,
@@ -65,6 +63,19 @@ class Pet {
     this.currentAction = this.actions.idle;
 
     this.image = this.moodImages().still[0];
+  }
+
+  listNextActions(neutralList, happyList = [], excitedList = []) {
+    let nextActionNames = neutralList;
+    if (this.mood === "happy" || this.mood === "excited") {
+      nextActionNames = nextActionNames.concat(happyList);
+    }
+
+    if (this.mood === "excited") {
+      nextActionNames = nextActionNames.concat(excitedList);
+    }
+
+    return nextActionNames[Math.floor(Math.random() * nextActionNames.length)];
   }
 
   randomWalk(actionData) {
