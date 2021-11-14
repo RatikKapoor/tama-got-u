@@ -9,7 +9,6 @@ import { SingleTaskModel } from '../models/singleTask';
 import { UserModel } from '../models/user';
 import _ from "lodash";
 import "./HomeScreen.css"
-import { borderColor } from '@mui/system';
 import { Timestamp } from '@firebase/firestore';
 
 interface HomeScreenProps {
