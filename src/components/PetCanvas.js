@@ -69,6 +69,9 @@ function PetCanvas(props) {
     ctx.fillStyle = 'rgb(52, 235, 225)';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
+    ctx.fillStyle = 'rgba(29, 163, 24)';
+    ctx.fillRect(0, 462, ctx.canvas.width, 900);
+
     pet.update();
 
     pet.draw(ctx);
