@@ -1,9 +1,10 @@
 import React from "react";
 import { List } from "@mui/material";
-import SingleTask, { SingleTaskProps } from "./SingleTask";
+import SingleTask from "./SingleTask";
+import { SingleTaskModel } from "../models/singleTask";
 
 interface TaskListProps {
-  data: SingleTaskProps[];
+  data: SingleTaskModel[];
 }
 
 const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {

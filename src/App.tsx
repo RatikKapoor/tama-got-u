@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PetCanvas from "./components/PetCanvas";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
@@ -6,11 +6,8 @@ import "./App.css";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import Firestore from "./api/firestore";
-import TaskList from "./components/TaskList";
-import TopThree from "./components/TopThree";
 import { UserModel } from "./models/user";
-import TaskPrompt from "./components/TaskPrompt";
-import ActivitySettingsCard from "./components/ActivitySettingsCard";
+import HomeScreen from "./screens/HomeScreen";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -45,12 +42,7 @@ function App() {
       <Switch>
         <Route path="/">
           <PetCanvas />
-          <div style={{ position: "relative" }}>
-            <TaskList data={user && user["preferred-activities"]} />
-            <TaskPrompt />
-            <TopThree data={user && user["preferred-activities"]} />
-            <ActivitySettingsCard></ActivitySettingsCard>
-          </div>
+          <HomeScreen user={user} />
         </Route>
       </Switch>
     </Router>
