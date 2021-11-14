@@ -39,7 +39,9 @@ import CloudHandler from "../pet/CloudHandler";
 function PetCanvas(props) {
   const [images, setImages] = useState();
   const [plantImages, setPlantImages] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [grassImages, setGrassImages] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [cloudImages, setCloudImages] = useState();
   const [pet, setPet] = useState();
   const [plants, setPlants] = useState([]);
@@ -101,11 +103,13 @@ function PetCanvas(props) {
         img.src = p;
         return img;
       }),
-      flower: [flower0ImgSrc, flower1ImgSrc, flower2ImgSrc, flower3ImgSrc].map((p) => {
-        const img = new Image();
-        img.src = p;
-        return img;
-      }),
+      flower: [flower0ImgSrc, flower1ImgSrc, flower2ImgSrc, flower3ImgSrc].map(
+        (p) => {
+          const img = new Image();
+          img.src = p;
+          return img;
+        }
+      ),
     };
 
     const grassImgs = arrToImgs([grass0ImgSrc, grass1ImgSrc, grass2ImgSrc]);
@@ -147,8 +151,12 @@ function PetCanvas(props) {
     const numGrass = Math.floor(Math.random() * 30) + 10;
     const grassRef = [];
     for (let i = 0; i < numGrass; i++) {
-      const leftX = window.innerWidth * 0.15 + (window.innerWidth / 7) * (Math.random() * 2 - 1);
-      const rightX = window.innerWidth * 0.85 + (window.innerWidth / 7) * (Math.random() * 2 - 1);
+      const leftX =
+        window.innerWidth * 0.15 +
+        (window.innerWidth / 7) * (Math.random() * 2 - 1);
+      const rightX =
+        window.innerWidth * 0.85 +
+        (window.innerWidth / 7) * (Math.random() * 2 - 1);
 
       const x = Math.random() > 0.5 ? rightX : leftX;
       const y = 470 + Math.random() * (window.innerHeight - 470);
@@ -165,13 +173,18 @@ function PetCanvas(props) {
     const shouldAddPlant = immaturePlants.length === 0 || Math.random() > 0.7;
     if (shouldAddPlant) {
       setPlants((prevPlants) => {
-        const x = window.innerWidth / 2 + (window.innerWidth / 3) * (Math.random() * 2 - 1);
+        const x =
+          window.innerWidth / 2 +
+          (window.innerWidth / 3) * (Math.random() * 2 - 1);
         const y = 400;
-        let newPlants = prevPlants.concat([new Plant({ x, y, images: plantImages })]);
+        let newPlants = prevPlants.concat([
+          new Plant({ x, y, images: plantImages }),
+        ]);
         return newPlants;
       });
     } else {
-      const plant = immaturePlants[Math.floor(Math.random() * immaturePlants.length)];
+      const plant =
+        immaturePlants[Math.floor(Math.random() * immaturePlants.length)];
       plant.grow();
     }
   };

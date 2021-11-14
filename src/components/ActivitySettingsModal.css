@@ -1,0 +1,11 @@
+.activity-settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

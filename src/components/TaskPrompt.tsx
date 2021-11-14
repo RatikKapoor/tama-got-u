@@ -31,6 +31,13 @@ const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
         <div className="task-prompt">
             <h1 className="white-text">Task: {props.task && props.task.task}</h1>
             <Typography variant="body1" className="white-text prompt-time">
+                Days: {props.task && props.task.days.map((v, k) => {
+                    if (k < 1)
+                        return v + ", ";
+                    else return v
+                })}
+            </Typography>
+            <Typography variant="body1" className="white-text prompt-time">
                 Time: {props.task && props.task.nextTime && props.task.nextTime.toDate().toLocaleTimeString()}
             </Typography>
             <Stack spacing={2} direction="row">
