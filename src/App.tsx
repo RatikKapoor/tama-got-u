@@ -6,6 +6,8 @@ import "./App.css";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import Firestore from "./api/firestore";
+import TaskList from "./components/TaskList";
+import { UserModel } from "./models/user";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -21,11 +23,12 @@ const firebaseConfig = {
 };
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<undefined | UserModel>();
 
   const loadUsers = async () => {
     const fireStore = new Firestore();
-    setUser(await fireStore.getUser());
+    const temp = (await fireStore.getUser()) as UserModel;
+    setUser(temp);
   };
 
   useEffect(() => {
@@ -38,8 +41,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/">
-          <Test />
-          {user && <p>{user.displayname}</p>}
+          <TaskList data={user && user["preferred-activities"]} />
         </Route>
       </Switch>
     </Router>

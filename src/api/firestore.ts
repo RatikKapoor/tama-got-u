@@ -6,6 +6,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import { UserModel } from "../models/user";
 
 class Firestore {
   db;
@@ -14,7 +15,7 @@ class Firestore {
     this.db = getFirestore();
   }
 
-  async getUsers() {
+  private async getUsers(): Promise<UserModel[]> {
     const querySnapshot = await getDocs(collection(this.db, "users"));
     let result = [];
     querySnapshot.docs.forEach((v) => {
@@ -23,15 +24,14 @@ class Firestore {
     return result;
   }
 
-  async getUser() {
+  public async getUser(): Promise<UserModel> {
     const userSnapshot = await this.getUsers();
-    console.warn(userSnapshot);
     return userSnapshot[0];
   }
 
-  async updateUser(u) {
+  public async updateUser(u: UserModel) {
     const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
-    await updateDoc(userRef, u);
+    // await updateDoc(userRef, u);
   }
 }
 
