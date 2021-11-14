@@ -3,5 +3,5 @@ export interface PetModel {
   level: number;
   mood_status: "excited" | "neutral" | "happy";
   name: string;
-  type: "fuzzball";
+  type: "tama";
 }

@@ -10,6 +10,7 @@ import { UserModel } from '../models/user';
 import _ from "lodash";
 import "./HomeScreen.css"
 import { borderColor } from '@mui/system';
+import { Timestamp } from '@firebase/firestore';
 
 interface HomeScreenProps {
   user?: UserModel;
@@ -47,11 +48,56 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
     props.firestore.updateUser(newUser);
   }
 
+  const resetDb = () => {
+    const activityList: SingleTaskModel[] = [
+      {
+        nextTime: Timestamp.fromDate(new Date(1636851600000)),
+        task: "Read a book for 10 minutes"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1636866000000)),
+        task: "Finish a workout"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1636930800000)),
+        task: "Play with my dog"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1637006400000)),
+        task: "Practice mindfulness"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1637514000000)),
+        task: "Take dog on walk"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1637521200000)),
+        task: "Call a family member"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1637787600000)),
+        task: "Do house chores"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1637794800000)),
+        task: "Watch TV"
+      },
+      {
+        nextTime: Timestamp.fromDate(new Date(1638309600000)),
+        task: "Eat a healthy snack"
+      },
+    ]
+    let newUser = _.cloneDeep(props.user);
+    newUser["preferred-activities"] = activityList;
+    props.updateUser(newUser);
+    props.firestore.updateUser(newUser);
+  }
+
   const toggleShowTaskList = () => setShowTaskList(!showTaskList);
 
   return (
     <div className="overlay-div">
-      <Button variant="outlined" style={{color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2}} onClick={toggleShowTaskList}>
+      <Button variant="outlined" style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }} onClick={toggleShowTaskList}>
         {showTaskList ? "Back" : "Show Tasks"}
       </Button>
       {(props.user && props.user['preferred-activities']) &&
@@ -59,6 +105,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
           <TaskList
             data={props.user["preferred-activities"]}
             setAndShowActivitySettingsModal={setAndShowActivitySettingsModal}
+            resetDb={resetDb}
           />
           :
           <TopThree
