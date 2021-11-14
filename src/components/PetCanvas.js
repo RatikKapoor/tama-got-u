@@ -63,11 +63,10 @@ function PetCanvas(props) {
     if (!images || !pet) return;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = "lime";
+    ctx.fillStyle = "grey";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    // ctx.drawImage(images.neutral.still[0], 100, 100, 64, 64);
-    pet.walk("left");
+    pet.update();
 
     pet.draw(ctx);
   };
@@ -76,7 +75,7 @@ function PetCanvas(props) {
     const imgs = buildImages();
     setImages(imgs);
 
-    setPet(new Pet({ x: 800, y: 100, images: imgs }));
+    setPet(new Pet({ x: window.innerWidth / 2, y: 400, images: imgs }));
   }, []);
 
   // Set canvas to be fullscreen
