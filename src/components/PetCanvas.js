@@ -67,7 +67,7 @@ function PetCanvas(props) {
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     // ctx.drawImage(images.neutral.still[0], 100, 100, 64, 64);
-    pet.walk();
+    pet.walk("left");
 
     pet.draw(ctx);
   };
@@ -76,7 +76,7 @@ function PetCanvas(props) {
     const imgs = buildImages();
     setImages(imgs);
 
-    setPet(new Pet({ x: 200, y: 100, images: imgs }));
+    setPet(new Pet({ x: 800, y: 100, images: imgs }));
   }, []);
 
   // Set canvas to be fullscreen

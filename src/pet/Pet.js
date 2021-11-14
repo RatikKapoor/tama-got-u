@@ -20,12 +20,13 @@ class Pet {
   }
 
   walk(direction = "right") {
-    const walkFrames = 20;
+    const walkFrames = 16;
+    const walkDirection = direction === "right" ? 3 : -3;
     const walkImgs = direction === "right" ? this.moodImages().walkRight : this.moodImages().walkLeft;
 
     this.image = walkImgs[Math.floor(this.walkAnimTimer / walkFrames) % walkImgs.length];
 
-    this.move(3, 0);
+    this.move(walkDirection, 0);
     this.walkAnimTimer++;
   }
 
