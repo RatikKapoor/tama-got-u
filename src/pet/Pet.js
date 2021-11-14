@@ -13,6 +13,7 @@ class Pet {
     this.walkAnimTimer = 0;
     this.walkFrames = 16;
 
+    // Actions to run in background
     this.actions = {
       idle: {
         action: "idle",
@@ -21,7 +22,7 @@ class Pet {
         max: 300,
         currentMax: 100,
         nextActions() {
-          return this.listNextActions(["walk"], ["hop"]);
+          return this.listNextActions(["walk"], [], ["hop"]);
         },
       },
       walk: {
@@ -31,7 +32,7 @@ class Pet {
         max: 100,
         currentMax: 60,
         nextActions() {
-          return this.listNextActions(["idle"], ["hop"]);
+          return this.listNextActions(["idle"], [], ["hop"]);
         },
         currentData: {
           direction: 1,
@@ -62,6 +63,8 @@ class Pet {
     };
     this.currentAction = this.actions.idle;
 
+    this.activeAction = null; // Actions that are directly in response to user interaction
+
     this.image = this.moodImages().still[0];
   }
 
@@ -87,32 +90,38 @@ class Pet {
   }
 
   update() {
-    switch (this.currentAction.action) {
-      case "idle":
-        this.idle();
-        break;
-      case "walk":
-        this.walk(this.currentAction.currentData.direction);
-        break;
-      case "hop":
-        this.hop(this.currentAction.currentData.direction);
-        break;
-      default:
-        console.warn("Pet hit illegal state", this.currentAction?.action);
-        this.initAction(this.actions.idle);
+    if (this.activeAction) {
+      this.runAction(this.activeAction);
+    } else {
+      this.runAction(this.currentAction);
     }
-
-    this.updateAction(this.currentAction);
   }
 
   draw(ctx) {
     ctx.drawImage(this.image, this.x, this.y, 64, 64);
   }
 
-  initAction(actionData) {
-    actionData.timer = 0;
+  initActiveAction(actionData, { currentMax, onInit = null }) {
+    this.initAction(actionData);
+
+    actionData.currentMax = currentMax;
+    this.activeAction = actionData;
+
+    if (onInit) {
+      onInit.call(this, actionData);
+    }
+  }
+
+  initBackgroundAction(actionData) {
+    this.initAction(actionData);
+
     const timeRange = actionData.max - actionData.min;
     actionData.currentMax = Math.random() * timeRange + actionData.min;
+  }
+
+  // Helper function for initiating action
+  initAction(actionData) {
+    actionData.timer = 0;
     this.currentAction = actionData;
 
     if (actionData.hasOwnProperty("onInit")) {
@@ -120,30 +129,51 @@ class Pet {
     }
   }
 
+  // Run actions when the user is idle
+  runAction(actionData) {
+    switch (actionData.action) {
+      case "idle":
+        this.idle();
+        break;
+      case "walk":
+        this.walk(actionData.currentData.direction);
+        break;
+      case "hop":
+        this.hop(actionData.currentData.direction);
+        break;
+      default:
+        console.warn("Pet hit illegal state", actionData?.action);
+        this.initBackgroundAction(this.actions.idle);
+    }
+
+    this.updateAction(actionData);
+  }
+
   updateAction(actionData) {
     if (actionData.timer >= actionData.currentMax) {
+      this.endAction(actionData);
       this.triggerNextAction(actionData);
     }
 
     actionData.timer++;
   }
 
-  triggerNextAction(actionData) {
+  endAction(actionData) {
+    this.activeAction = null;
+
     if (actionData.hasOwnProperty("onComplete")) {
       actionData.onComplete.call(this, actionData);
     }
+  }
 
+  triggerNextAction(actionData) {
     let nextActionName = "";
     if (typeof actionData.nextActions === "function") {
       nextActionName = actionData.nextActions.call(this, actionData);
     } else {
       nextActionName = actionData.nextActions[Math.floor(Math.random() * actionData.nextActions.length)];
     }
-    this.initAction(this.actions[nextActionName]);
-  }
-
-  initIdleAction() {
-    this.initAction(this.actions.idle);
+    this.initBackgroundAction(this.actions[nextActionName]);
   }
 
   move(dx, dy) {
@@ -163,7 +193,10 @@ class Pet {
   }
 
   hop(direction) {
-    const walkDirection = direction > 0 ? 3 : -3;
+    let walkDirection = 0;
+    if (direction > 0) walkDirection = 3;
+    if (direction < 0) walkDirection = -3;
+
     this.ySpeed += this.gravity;
     if (this.y >= this.originalY) {
       this.y = this.originalY;
@@ -179,13 +212,42 @@ class Pet {
   }
 
   moodImages() {
-    return this.images[this.mood];
+    const mood = this.mood === "excited" ? "happy" : this.mood;
+    return this.images[mood];
   }
 
   setHappiness(happiness) {
     this.happiness = happiness;
-    if (this.happiness >= 2) {
+
+    if (this.happiness >= 4) {
+      this.mood = "excited";
+    } else if (this.happiness >= 2) {
       this.mood = "happy";
+    } else {
+      this.mood = "neutral";
+    }
+  }
+
+  setActiveAction(actionName) {
+    if (this.activeAction) {
+      this.endAction(this.activeAction);
+    }
+    if (this.currentAction) {
+      this.endAction(this.currentAction);
+    }
+
+    switch (actionName) {
+      case "hop":
+        this.initActiveAction(this.actions.hop, {
+          currentMax: 30,
+          onInit(actionData) {
+            actionData.currentData.direction = 0;
+          },
+        });
+        break;
+      default:
+        console.warn("Illegal action name provided in setActiveAction");
+        this.initBackgroundAction(this.actions.idle);
     }
   }
 }

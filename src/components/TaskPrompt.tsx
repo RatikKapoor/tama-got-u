@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { incrementHappiness } from "../features/pet/petSlice";
+import { incrementHappiness, decrementHappiness } from "../features/pet/petSlice";
 import { Stack, Button, Typography } from '@mui/material';
 import { SingleTaskModel } from "../models/singleTask";
 
@@ -11,6 +11,11 @@ interface TaskPromptProps {
 
 const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
     const dispatch = useDispatch();
+
+    const onDismissTask = () => {
+        dispatch(decrementHappiness())
+        removeSelf();
+    }
 
     const removeSelf = () => {
         props.removeActivityFromUser(props.task);

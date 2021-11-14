@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearLastTrigger } from "../features/pet/petSlice";
 import Canvas from "./Canvas";
 
 // Import way too many images
@@ -21,6 +22,8 @@ function PetCanvas(props) {
   const [pet, setPet] = useState();
 
   const happiness = useSelector((state) => state.pet.happiness);
+  const lastTrigger = useSelector((state) => state.pet.lastTrigger);
+  const dispatch = useDispatch();
 
   const buildImages = () => {
     const imgs = {
@@ -66,10 +69,10 @@ function PetCanvas(props) {
     if (!images || !pet) return;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = 'rgb(52, 235, 225)';
+    ctx.fillStyle = "rgb(52, 235, 225)";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    ctx.fillStyle = 'rgba(29, 163, 24)';
+    ctx.fillStyle = "rgba(29, 163, 24)";
     ctx.fillRect(0, 462, ctx.canvas.width, 900);
 
     pet.update();
@@ -86,11 +89,14 @@ function PetCanvas(props) {
 
   // Update pet object to have happiness
   useEffect(() => {
-    setPet((prevPet) => {
-      prevPet.setHappiness(happiness);
-      return prevPet;
-    });
-  }, [happiness]);
+    if (!pet) return;
+
+    pet.setHappiness(happiness);
+    if (lastTrigger === "incrementHappiness") {
+      pet.setActiveAction("hop");
+      dispatch(clearLastTrigger());
+    }
+  }, [happiness, lastTrigger]);
 
   // Set canvas to be fullscreen
   const canvasWidth = window.innerWidth;
