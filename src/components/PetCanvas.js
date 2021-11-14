@@ -34,6 +34,7 @@ import cloudSmall0ImgSrc from "../assets/cloud/cloud-small-0.png";
 import cloudSmall1ImgSrc from "../assets/cloud/cloud-small-1.png";
 import cloudBig0ImgSrc from "../assets/cloud/cloud-big-0.png";
 import cloudBig1ImgSrc from "../assets/cloud/cloud-big-1.png";
+import CloudHandler from "../pet/CloudHandler";
 
 function PetCanvas(props) {
   const [images, setImages] = useState();
@@ -43,7 +44,7 @@ function PetCanvas(props) {
   const [pet, setPet] = useState();
   const [plants, setPlants] = useState([]);
   const [grass, setGrass] = useState([]);
-  const [clouds, setClouds] = useState([]);
+  const [cloudHandler, setCloudHandler] = useState();
 
   const happiness = useSelector((state) => state.pet.happiness);
   const lastTrigger = useSelector((state) => state.pet.lastTrigger);
@@ -100,13 +101,11 @@ function PetCanvas(props) {
         img.src = p;
         return img;
       }),
-      flower: [flower0ImgSrc, flower1ImgSrc, flower2ImgSrc, flower3ImgSrc].map(
-        (p) => {
-          const img = new Image();
-          img.src = p;
-          return img;
-        }
-      ),
+      flower: [flower0ImgSrc, flower1ImgSrc, flower2ImgSrc, flower3ImgSrc].map((p) => {
+        const img = new Image();
+        img.src = p;
+        return img;
+      }),
     };
 
     const grassImgs = arrToImgs([grass0ImgSrc, grass1ImgSrc, grass2ImgSrc]);
@@ -119,7 +118,7 @@ function PetCanvas(props) {
   };
 
   const draw = (ctx, frameCount) => {
-    if (!images || !pet) return;
+    if (!images || !pet || !cloudHandler) return;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.fillStyle = "rgb(52, 235, 225)";
@@ -129,6 +128,7 @@ function PetCanvas(props) {
     ctx.fillStyle = "rgba(74, 168, 71)";
     ctx.fillRect(0, 462, ctx.canvas.width, 900);
 
+    cloudHandler.update();
     pet.update();
 
     grass.forEach((grass) => {
@@ -139,6 +139,7 @@ function PetCanvas(props) {
       plant.draw(ctx);
     });
 
+    cloudHandler.draw(ctx);
     pet.draw(ctx);
   };
 
@@ -164,18 +165,13 @@ function PetCanvas(props) {
     const shouldAddPlant = immaturePlants.length === 0 || Math.random() > 0.5;
     if (shouldAddPlant) {
       setPlants((prevPlants) => {
-        const x =
-          window.innerWidth / 2 +
-          (window.innerWidth / 3) * (Math.random() * 2 - 1);
+        const x = window.innerWidth / 2 + (window.innerWidth / 3) * (Math.random() * 2 - 1);
         const y = 400;
-        let newPlants = prevPlants.concat([
-          new Plant({ x, y, images: plantImages }),
-        ]);
+        let newPlants = prevPlants.concat([new Plant({ x, y, images: plantImages })]);
         return newPlants;
       });
     } else {
-      const plant =
-        immaturePlants[Math.floor(Math.random() * immaturePlants.length)];
+      const plant = immaturePlants[Math.floor(Math.random() * immaturePlants.length)];
       plant.grow();
     }
   };
@@ -189,6 +185,7 @@ function PetCanvas(props) {
 
     setPet(new Pet({ x: window.innerWidth / 2, y: 400, images: imgs }));
     buildGrass(grassImgs);
+    setCloudHandler(new CloudHandler({ images: cloudImgs }));
   }, []);
 
   // Update pet object to have happiness

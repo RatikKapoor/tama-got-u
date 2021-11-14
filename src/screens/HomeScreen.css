@@ -19,7 +19,8 @@
 
 .bottom-section {
   position: absolute;
-  top: 50vh;
+  /* top: 50vh; */
+  top: 470px;
   width: 100vw;
 }
 
