@@ -24,12 +24,16 @@ const firebaseConfig = {
 
 function App() {
   const [user, setUser] = useState<undefined | UserModel>();
+  const [firestore, setFirestore] = useState<Firestore | undefined>();
 
   const loadUsers = async () => {
-    const fireStore = new Firestore();
+    const fireStore = new Firestore()
+    setFirestore(fireStore);
     const temp = (await fireStore.getUser()) as UserModel;
     setUser(temp);
   };
+
+
 
   useEffect(() => {
     // Initialize Firebase
@@ -42,7 +46,7 @@ function App() {
       <Switch>
         <Route path="/">
           <PetCanvas />
-          <HomeScreen user={user} />
+          <HomeScreen user={user} firestore={firestore} updateUser={setUser} />
         </Route>
       </Switch>
     </Router>

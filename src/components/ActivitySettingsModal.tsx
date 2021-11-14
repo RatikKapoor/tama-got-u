@@ -12,22 +12,27 @@ interface ActivitySettingsModalProps {
   task?: SingleTaskModel;
   show: boolean;
   setShowActivitySettingsModal: (x: boolean) => void;
+  updateActivity: (a: SingleTaskModel, o: string) => void;
 }
 
 const ActivitySettingsModal: React.FC<ActivitySettingsModalProps> = (props: ActivitySettingsModalProps) => {
   const [taskTitle, setTaskTitle] = useState<string>("");
-  const [nextTaskTime, setNextTaskTime] = useState<Timestamp>();
   const [day, setDay] = useState("Monday")
   const [time, setTime] = useState(new Date('2014-08-18T21:11:54'));
 
   const updateTaskData = () => {
-
+    const newTask: SingleTaskModel = {
+      task: taskTitle,
+      nextTime: Timestamp.fromDate(time)
+    }
+    props.updateActivity(newTask, props.task.task);
+    props.setShowActivitySettingsModal(false);
   }
 
   useEffect(() => {
     setTaskTitle(props.task && props.task.task);
-    setNextTaskTime(props.task && props.task.nextTime);
-  }, [])
+    setTime(props.task && props.task.nextTime.toDate())
+  }, [props.task])
 
   return (
     <Modal open={props.show} onClose={() => props.setShowActivitySettingsModal(false)}>
@@ -49,7 +54,12 @@ const ActivitySettingsModal: React.FC<ActivitySettingsModalProps> = (props: Acti
         >
           Cancel
         </Button>
-        <Button style={{ marginLeft: "auto" }}>Done</Button>
+        <Button
+          style={{ marginLeft: "auto" }}
+          onClick={updateTaskData}
+        >
+          Save
+        </Button>
       </Box>
     </Modal>
   );
