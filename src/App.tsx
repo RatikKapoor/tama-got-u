@@ -7,6 +7,7 @@ import "./App.css";
 import { initializeApp } from "firebase/app";
 import Firestore from "./api/firestore";
 import TaskList from "./components/TaskList";
+import TopThree from "./components/TopThree";
 import { UserModel } from "./models/user";
 import TaskPrompt from "./components/TaskPrompt";
 
@@ -47,6 +48,7 @@ function App() {
             <TaskList data={user && user["preferred-activities"]} />
           </div>
           <TaskPrompt />
+          <TopThree />
         </Route>
       </Switch>
     </Router>
