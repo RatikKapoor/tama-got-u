@@ -36,8 +36,8 @@ const ActivitySettingsModal: React.FC<ActivitySettingsModalProps> = (props: Acti
 
   return (
     <Modal open={props.show} onClose={() => props.setShowActivitySettingsModal(false)}>
-      <Box sx={{ background: "red" }}>
-        <Typography sx={{ fontSize: 21 }} color="text.secondary" gutterBottom>
+      <Box sx={{ background: "#ffffff" }}>
+        <Typography sx={{ fontSize: 30, paddingLeft: 6 }} color="text.primary" gutterBottom>
           {taskTitle}
         </Typography>
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -55,7 +55,7 @@ const ActivitySettingsModal: React.FC<ActivitySettingsModalProps> = (props: Acti
           Cancel
         </Button>
         <Button
-          style={{ marginLeft: "auto" }}
+          style={{ marginLeft: "auto"}}
           onClick={updateTaskData}
         >
           Save
