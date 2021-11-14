@@ -13,9 +13,11 @@ import happyWalkLeft0Src from "../assets/pet/happy-walk-left-0.png";
 import happyWalkLeft1Src from "../assets/pet/happy-walk-left-1.png";
 import happyWalkRight0Src from "../assets/pet/happy-walk-right-0.png";
 import happyWalkRight1Src from "../assets/pet/happy-walk-right-1.png";
+import Pet from "../pet/Pet";
 
 function PetCanvas(props) {
   const [images, setImages] = useState();
+  const [pet, setPet] = useState();
 
   const buildImages = () => {
     const imgs = {
@@ -54,19 +56,27 @@ function PetCanvas(props) {
       });
     });
 
-    setImages(imgs);
+    return imgs;
   };
 
   const draw = (ctx, frameCount) => {
-    if (!images) return;
+    if (!images || !pet) return;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = "lime";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    ctx.drawImage(images.neutral.still[0], 100, 100);
+    // ctx.drawImage(images.neutral.still[0], 100, 100, 64, 64);
+    pet.walk();
+
+    pet.draw(ctx);
   };
 
   useEffect(() => {
-    buildImages();
+    const imgs = buildImages();
+    setImages(imgs);
+
+    setPet(new Pet({ x: 200, y: 100, images: imgs }));
   }, []);
 
   // Set canvas to be fullscreen
