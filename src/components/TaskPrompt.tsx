@@ -29,8 +29,8 @@ const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
                 {/* <Button variant="outlined" onClick={() => {
                     alert('Here we should open the event editor!');
                 }}>Edit</Button> */}
-                <Button variant="outlined" onClick={removeSelf}>Dismiss</Button>
-                <Button variant="outlined" onClick={onDoneTask}>✓ Done</Button>
+                <Button variant="outlined" onClick={removeSelf} style={{color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2}}>Dismiss</Button>
+                <Button variant="outlined" onClick={onDoneTask} style={{color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2}}>✓ Done</Button>
             </Stack>
         </div>
     );

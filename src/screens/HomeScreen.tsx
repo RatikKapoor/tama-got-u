@@ -9,6 +9,7 @@ import { SingleTaskModel } from '../models/singleTask';
 import { UserModel } from '../models/user';
 import _ from "lodash";
 import "./HomeScreen.css"
+import { borderColor } from '@mui/system';
 
 interface HomeScreenProps {
   user?: UserModel;
@@ -50,7 +51,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
 
   return (
     <div className="overlay-div">
-      <Button variant="outlined" href = "#Button" onClick={toggleShowTaskList}>
+      <Button variant="outlined" style={{color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2}} onClick={toggleShowTaskList}>
         {showTaskList ? "Back" : "Show Tasks"}
       </Button>
       {(props.user && props.user['preferred-activities']) &&
