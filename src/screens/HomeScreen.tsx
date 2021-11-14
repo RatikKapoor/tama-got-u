@@ -7,6 +7,7 @@ import TaskPrompt from '../components/TaskPrompt';
 import TopThree from '../components/TopThree';
 import { SingleTaskModel } from '../models/singleTask';
 import { UserModel } from '../models/user';
+import _ from "lodash";
 import "./HomeScreen.css"
 
 interface HomeScreenProps {
@@ -32,9 +33,16 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
   }
 
   const updateUserWithNewActivity = (newActivity: SingleTaskModel, oldTaskName: string) => {
-    let newUser = props.user;
+    let newUser: UserModel = _.cloneDeep(props.user);
     newUser['preferred-activities'][newUser['preferred-activities'].findIndex(x => x.task === oldTaskName)] = newActivity;
     props.updateUser(newUser)
+    props.firestore.updateUser(newUser);
+  }
+
+  const removeActivityFromUser = (toRemoveActivity: SingleTaskModel) => {
+    let newUser: UserModel = _.cloneDeep(props.user);
+    newUser['preferred-activities'] = newUser['preferred-activities'].filter(x => x.task !== toRemoveActivity.task);
+    props.updateUser(newUser);
     props.firestore.updateUser(newUser);
   }
 
@@ -45,19 +53,19 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
       <Button onClick={toggleShowTaskList}>
         {showTaskList ? "Back" : "Show Tasks"}
       </Button>
-      {
-        showTaskList ?
+      {(props.user && props.user['preferred-activities']) &&
+        (showTaskList ?
           <TaskList
-            data={props.user && props.user["preferred-activities"]}
+            data={props.user["preferred-activities"]}
             setAndShowActivitySettingsModal={setAndShowActivitySettingsModal}
           />
           :
           <TopThree
-            data={props.user && props.user["preferred-activities"]}
+            data={props.user["preferred-activities"]}
             setActiveTask={setActiveTask}
-          />
+          />)
       }
-      <TaskPrompt task={activeTask} />
+      <TaskPrompt task={activeTask} removeActivityFromUser={removeActivityFromUser} />
       <ActivitySettingsModal
         show={showActivitySettingsModal}
         task={activitySettingsModalTask}
