@@ -32,7 +32,7 @@ class Pet {
           direction: 1,
         },
         onInit(actionData) {
-          const distToCenter = this.x - this.spawnPoint.x;
+          const distToCenter = this.x - window.innerWidth / 2;
           const maxWanderDist = window.innerWidth * 0.3;
           const rand = Math.random() * 2 - 1; // Random num from -1 to 1
           const weightCurve = Math.pow(distToCenter / maxWanderDist, 3);
