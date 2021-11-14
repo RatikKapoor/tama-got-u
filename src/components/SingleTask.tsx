@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, ListItemText } from "@mui/material";
+import { ListItem, ListItemText, ListItemButton } from "@mui/material";
 import { SingleTaskModel } from "../models/singleTask";
 
 interface SingleTaskProps {
@@ -13,10 +13,12 @@ const SingleTask: React.FC<SingleTaskProps> = (props: SingleTaskProps) => {
       sx={{ backgroundColor: "#fff", borderRadius: 10, marginBottom: 1 }}
       onClick={() => props.setAndShowActivitySettingsModal(props.task)}
     >
+      <ListItemButton>
       <ListItemText
         primary={props.task.task}
         secondary={props.task.nextTime.toDate().toLocaleTimeString()}
       />
+      </ListItemButton>
     </ListItem>
   );
 };
