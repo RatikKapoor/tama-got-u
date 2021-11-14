@@ -1,44 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# tama-got-u
 
-## Available Scripts
+![tama](docs/home.png)
 
-In the project directory, you can run:
+## Inspiration
 
-### `yarn start`
+1.2 million children and youth in Canada are affected by mental illness (CMHA). Common signs of mental distress and illness include decline in healthy habits and losing interest in hobbies and activities that a person once enjoyed. Tama-got-u emerged out of a desire to help users build healthy habits or re-discover habits they once enjoyed using a gamification strategy.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## What it does
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Tama-got-u is a virtual pet that aids you in completing tasks. This helps you build positive habits through gamification. You take care of Tama-got-u by taking care of yourself. You are able to add tasks that suit your needs. Tama-got-u sends you reminders to complete tasks that you set. As you complete tasks, Tama-got-u thrives, its happiness increases, and the environment around it flourishes, providing positive reinforcement.
 
-### `yarn test`
+## How we built it
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Our application is built upon a foundation of the React-Redux-Typescript combination. In addition to React, we’ve also included Redux and Typescript to really set the stage for an easily and highly scalable future. Our character was designed using HTML5 and brought to life using Javascript.
+Overall, our current iteration is a simply designed and functional application that is built for the web, accessible using any modern device. We know that being able to reach a wide audience is paramount to our success, so we have woven usability into our design as our app is simple. Our backend stack is based on Firebase firestore and hosted on Firebase. This simple and well documented platform ensures that user data is secure, backend is easy to maintain and is scalable.
 
-### `yarn build`
+## Technologies used (Our Stack)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React/Redux
+- Firebase
+- Typescript
+- Javascript
+- HTML5
+- Material-UI library
+- Node.js
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Challenges we ran into
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Accommodating different states of Tama-got-u into the environment.
+- Making the environment interactive and changing it as users complete tasks or dismiss them.
+- Complex data structure to keep track of different tasks, states of task and whether a reminder should be sent.
 
-### `yarn eject`
+## Accomplishments that we are Proud Of
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Creating a well-integrated design that is visually appealing and easy to use.
+- Ability to change the state of the pet based on task completion.
+- Functionality to add tasks and change the time of the notification.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## What we learned
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Through the process of developing Tama-got-u for Hack the Change 2021, we learned numerous skills that will help our team in future projects we pursue, whether that be through school, work, or another hackathon.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Prioritization and time management of features that are essential to our project and judging.
+- Git and project management skills in a fast paced team environment
+- Debugging web apps and Firebase.
 
-## Learn More
+## What’s Next for Tama-got-u
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+As we further develop Tama-got-u we hope to improve on some current implementations and develop additional features:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- A caregiver portal to give parents and Health care practitioners (HCPs) the ability to customize Tama-got-u’s tasks.
+- History and streaks for increased motivation.
+- Customizable pet types.
+- Increased number of pet states.
