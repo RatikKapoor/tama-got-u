@@ -1,4 +1,6 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+import { incrementHappiness } from "../features/pet/petSlice";
 import { Stack, Button, Typography } from '@mui/material';
 import { SingleTaskModel } from "../models/singleTask";
 
@@ -7,6 +9,8 @@ interface TaskPromptProps {
 }
 
 const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
+    const dispatch = useDispatch();
+
     return (
         <div>
             <h1>{props.task && props.task.task}</h1>
@@ -16,7 +20,7 @@ const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
                     alert('Here we should open the event editor!');
                 }}>Edit</Button>
                 <Button variant="outlined" onClick={() => {
-                    alert('Here we should increase totoros happiness!');
+                    dispatch(incrementHappiness())
                 }}>✓ Done</Button>
                 <Button variant="outlined" onClick={() => {
                     alert('Here we should remove the item from the DB!')
