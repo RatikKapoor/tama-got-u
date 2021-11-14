@@ -70,27 +70,27 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
       {
         nextTime: Timestamp.fromDate(new Date(1637006400000)),
         task: "Practice mindfulness",
-        days: ["Monday", "Tuesday"]
+        days: ["Tuesday", "Wednesday"]
       },
       {
         nextTime: Timestamp.fromDate(new Date(1637514000000)),
         task: "Take dog on walk",
-        days: ["Monday", "Tuesday"]
+        days: ["Tuesday", "Thursday"]
       },
       {
         nextTime: Timestamp.fromDate(new Date(1637521200000)),
         task: "Call a family member",
-        days: ["Monday", "Tuesday"]
+        days: ["Thursday", "Friday"]
       },
       {
         nextTime: Timestamp.fromDate(new Date(1637787600000)),
         task: "Do house chores",
-        days: ["Monday", "Tuesday"]
+        days: ["Saturday", "Sunday"]
       },
       {
         nextTime: Timestamp.fromDate(new Date(1637794800000)),
         task: "Watch TV",
-        days: ["Monday", "Tuesday"]
+        days: ["Saturday", "Sunday"]
       },
       {
         nextTime: Timestamp.fromDate(new Date(1638309600000)),
