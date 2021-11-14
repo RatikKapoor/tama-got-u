@@ -1,22 +1,8 @@
 import React from "react";
 import { ListItem, ListItemText } from "@mui/material";
-import { Timestamp } from "@firebase/firestore";
+import { SingleTaskModel } from "../models/singleTask";
 
-/*
-props: {
-    task: string;
-    nextTime: string;
-    lastCompleted: string;
-}
-*/
-
-export interface SingleTaskProps {
-  task: string;
-  nextTime: Timestamp;
-  lastCompleted?: Timestamp;
-}
-
-const SingleTask: React.FC<SingleTaskProps> = (props: SingleTaskProps) => {
+const SingleTask: React.FC<SingleTaskModel> = (props: SingleTaskModel) => {
   return (
     <>
       <ListItem sx={{ backgroundColor: "#fff", borderRadius: 10, marginBottom: 1 }}>
