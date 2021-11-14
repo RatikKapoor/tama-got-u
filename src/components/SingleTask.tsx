@@ -19,7 +19,7 @@ export interface SingleTaskProps {
 const SingleTask: React.FC<SingleTaskProps> = (props: SingleTaskProps) => {
   return (
     <>
-      <ListItem>
+      <ListItem sx={{ backgroundColor: "#fff", borderRadius: 10, marginBottom: 1 }}>
         <ListItemText
           primary={props.task}
           secondary={props.nextTime.toDate().toLocaleTimeString()}

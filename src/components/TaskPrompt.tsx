@@ -5,14 +5,10 @@ function PrintTaskTime(props) {
     return <Typography variant="body1">time: {props.time}</Typography>;
 }
 
-function PrintTaskTitle(props){
-    return <h1>{props.title}</h1>;
-}
-
 function TaskPrompt() {
     return (
         <div>
-            <PrintTaskTitle title="Task Title" />
+            <h1>Let's take a walk!</h1>
             <PrintTaskTime time="3:00pm" />
             <Stack spacing={2} direction="row">
                 <Button variant="outlined" onClick={() => {
