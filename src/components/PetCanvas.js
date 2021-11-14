@@ -63,7 +63,7 @@ function PetCanvas(props) {
     if (!images || !pet) return;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = "grey";
+    ctx.fillStyle = 'rgb(52, 235, 225)';
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     pet.update();
