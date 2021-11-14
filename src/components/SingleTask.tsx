@@ -2,16 +2,22 @@ import React from "react";
 import { ListItem, ListItemText } from "@mui/material";
 import { SingleTaskModel } from "../models/singleTask";
 
-const SingleTask: React.FC<SingleTaskModel> = (props: SingleTaskModel) => {
+interface SingleTaskProps {
+  task: SingleTaskModel;
+  setAndShowActivitySettingsModal: (x: SingleTaskModel) => void;
+}
+
+const SingleTask: React.FC<SingleTaskProps> = (props: SingleTaskProps) => {
   return (
-    <>
-      <ListItem sx={{ backgroundColor: "#fff", borderRadius: '16px', marginBottom: 1, alignSelf: 'center'}}>
-        <ListItemText
-          primary={props.task}
-          secondary={props.nextTime.toDate().toLocaleTimeString()}
-        />
-      </ListItem>
-    </>
+    <ListItem
+      sx={{ backgroundColor: "#fff", borderRadius: 10, marginBottom: 1 }}
+      onClick={() => props.setAndShowActivitySettingsModal(props.task)}
+    >
+      <ListItemText
+        primary={props.task.task}
+        secondary={props.task.nextTime.toDate().toLocaleTimeString()}
+      />
+    </ListItem>
   );
 };
 
