@@ -1,4 +1,10 @@
-import { getDocs, getFirestore, collection, doc } from "firebase/firestore";
+import {
+  getDocs,
+  getFirestore,
+  collection,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { UserModel } from "../models/user";
 
 class Firestore {
@@ -23,7 +29,7 @@ class Firestore {
   }
 
   public async updateUser(u: UserModel) {
-    const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
+    // const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
     // await updateDoc(userRef, u);
   }
 }

@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import Firestore from "./api/firestore";
 import TaskList from "./components/TaskList";
 import { UserModel } from "./models/user";
+import TaskPrompt from "./components/TaskPrompt";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -44,8 +45,8 @@ function App() {
           <PetCanvas />
           <div style={{ position: "relative" }}>
             <TaskList data={user && user["preferred-activities"]} />
-            {user && <p>{user.displayname}</p>}
           </div>
+          <TaskPrompt />
         </Route>
       </Switch>
     </Router>
