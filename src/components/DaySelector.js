@@ -4,7 +4,6 @@ import ListItem from '@mui/material/ListItem';
 import Chip from '@mui/material/Chip';
 
 export default function DaySelector() {
-  const [checked, setChecked] = React.useState([1]);
 
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
