@@ -46,6 +46,7 @@ function App() {
     // Initialize Firebase
     initializeApp(firebaseConfig);
     loadUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

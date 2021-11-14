@@ -79,11 +79,13 @@ function PetCanvas(props) {
         img.src = p;
         return img;
       }),
-      flower: [flower0ImgSrc, flower1ImgSrc, flower2ImgSrc, flower3ImgSrc].map((p) => {
-        const img = new Image();
-        img.src = p;
-        return img;
-      }),
+      flower: [flower0ImgSrc, flower1ImgSrc, flower2ImgSrc, flower3ImgSrc].map(
+        (p) => {
+          const img = new Image();
+          img.src = p;
+          return img;
+        }
+      ),
     };
 
     return [imgs, plantImgs];
@@ -114,13 +116,18 @@ function PetCanvas(props) {
     const shouldAddPlant = immaturePlants.length === 0 || Math.random() > 0.5;
     if (shouldAddPlant) {
       setPlants((prevPlants) => {
-        const x = window.innerWidth / 2 + (window.innerWidth / 3) * (Math.random() * 2 - 1);
+        const x =
+          window.innerWidth / 2 +
+          (window.innerWidth / 3) * (Math.random() * 2 - 1);
         const y = 400;
-        let newPlants = prevPlants.concat([new Plant({ x, y, images: plantImages })]);
+        let newPlants = prevPlants.concat([
+          new Plant({ x, y, images: plantImages }),
+        ]);
         return newPlants;
       });
     } else {
-      const plant = immaturePlants[Math.floor(Math.random() * immaturePlants.length)];
+      const plant =
+        immaturePlants[Math.floor(Math.random() * immaturePlants.length)];
       plant.grow();
     }
   };
@@ -143,6 +150,7 @@ function PetCanvas(props) {
       dispatch(clearLastTrigger());
       growGarden();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [happiness, lastTrigger]);
 
   // Set canvas to be fullscreen

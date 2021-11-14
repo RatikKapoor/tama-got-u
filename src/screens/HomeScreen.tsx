@@ -10,7 +10,6 @@ import { UserModel } from '../models/user';
 import _ from "lodash";
 import "./HomeScreen.css"
 import { Timestamp } from '@firebase/firestore';
-import { PetModel } from '../models/pet';
 import { useSelector } from 'react-redux';
 import { selectPet } from '../features/pet/petSlice';
 
@@ -105,6 +104,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
     };
     props.updateUser(newUser);
     props.firestore.updateUser(newUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [petData])
 
   const toggleShowTaskList = () => setShowTaskList(!showTaskList);
