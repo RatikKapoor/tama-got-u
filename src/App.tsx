@@ -10,6 +10,7 @@ import TaskList from "./components/TaskList";
 import TopThree from "./components/TopThree";
 import { UserModel } from "./models/user";
 import TaskPrompt from "./components/TaskPrompt";
+import ActivitySettingsCard from "./components/ActivitySettingsCard";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -46,9 +47,10 @@ function App() {
           <PetCanvas />
           <div style={{ position: "relative" }}>
             <TaskList data={user && user["preferred-activities"]} />
+            <TaskPrompt />
+            <TopThree data={user && user["preferred-activities"]} />
+            <ActivitySettingsCard></ActivitySettingsCard>
           </div>
-          <TaskPrompt />
-          <TopThree data={user && user["preferred-activities"]} />
         </Route>
       </Switch>
     </Router>

@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.1.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -14,6 +15,7 @@
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
+    "date-fns": "^2.25.0",
     "firebase": "^9.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
