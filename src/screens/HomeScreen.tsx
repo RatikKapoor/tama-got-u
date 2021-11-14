@@ -50,7 +50,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
 
   return (
     <div className="overlay-div">
-      <Button onClick={toggleShowTaskList}>
+      <Button variant="outlined" href = "#Button" onClick={toggleShowTaskList}>
         {showTaskList ? "Back" : "Show Tasks"}
       </Button>
       {(props.user && props.user['preferred-activities']) &&
