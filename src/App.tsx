@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PetCanvas from "./components/PetCanvas";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
@@ -40,7 +41,11 @@ function App() {
     <Router>
       <Switch>
         <Route path="/">
-          <TaskList data={user && user["preferred-activities"]} />
+          <PetCanvas />
+          <div style={{ position: "relative" }}>
+            <TaskList data={user && user["preferred-activities"]} />
+            {user && <p>{user.displayname}</p>}
+          </div>
         </Route>
       </Switch>
     </Router>
