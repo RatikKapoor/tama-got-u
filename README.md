@@ -1,6 +1,6 @@
 # tama-got-u
 
-![tama](docs/home.png)
+![tama](docs/tama-home.png)
 
 ## Inspiration
 
