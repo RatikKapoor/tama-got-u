@@ -96,29 +96,47 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
 
   return (
     <div className="overlay-div">
-      <Button variant="outlined" style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }} onClick={toggleShowTaskList}>
-        {showTaskList ? "Back" : "Show Tasks"}
-      </Button>
-      {(props.user && props.user['preferred-activities']) &&
-        (showTaskList ?
-          <TaskList
-            data={props.user["preferred-activities"]}
-            setAndShowActivitySettingsModal={setAndShowActivitySettingsModal}
-            resetDb={resetDb}
-          />
-          :
-          <TopThree
-            data={props.user["preferred-activities"]}
-            setActiveTask={setActiveTask}
-          />)
-      }
-      <TaskPrompt task={activeTask} removeActivityFromUser={removeActivityFromUser} />
-      <ActivitySettingsModal
-        show={showActivitySettingsModal}
-        task={activitySettingsModalTask}
-        setShowActivitySettingsModal={setShowActivitySettingsModal}
-        updateActivity={updateUserWithNewActivity}
-      />
+      <div className="container-div">
+        <div className="top-section">
+          <Button
+            variant="outlined" style={
+              {
+                color: '#000',
+                borderColor: '#000',
+                borderBlockWidth: 2,
+                margin: 4
+              }
+            } onClick={toggleShowTaskList}
+            className="toggle-button"
+          >
+            {showTaskList ? "Back" : "Show Tasks"}
+          </Button>
+          {(props.user && props.user['preferred-activities']) &&
+            (showTaskList ?
+              <TaskList
+                data={props.user["preferred-activities"]}
+                setAndShowActivitySettingsModal={setAndShowActivitySettingsModal}
+                resetDb={resetDb}
+              />
+              :
+              <TopThree
+                data={props.user["preferred-activities"]}
+                setActiveTask={setActiveTask}
+              />)
+          }
+        </div>
+        <div className="bottom-section">
+          <div className="bottom-section-inner">
+            <TaskPrompt task={activeTask} removeActivityFromUser={removeActivityFromUser} />
+          </div>
+        </div>
+        <ActivitySettingsModal
+          show={showActivitySettingsModal}
+          task={activitySettingsModalTask}
+          setShowActivitySettingsModal={setShowActivitySettingsModal}
+          updateActivity={updateUserWithNewActivity}
+        />
+      </div>
     </div>
   )
 }
