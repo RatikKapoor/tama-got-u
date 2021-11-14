@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import TaskList from '../components/TaskList';
 import TaskPrompt from '../components/TaskPrompt';
 import TopThree from '../components/TopThree';
-import ActivitySettingsCard from "../components/ActivitySettingsCard";
 import { SingleTaskModel } from '../models/singleTask';
 import { UserModel } from '../models/user';
 import "./HomeScreen.css"
@@ -38,7 +37,6 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
           />
       }
       <TaskPrompt task={activeTask} />
-      <ActivitySettingsCard />
     </div>
   )
 }
