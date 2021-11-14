@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Test from "./components/Test";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 

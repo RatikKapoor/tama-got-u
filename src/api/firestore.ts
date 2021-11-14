@@ -1,11 +1,4 @@
-import {
-  getDocs,
-  getDoc,
-  getFirestore,
-  collection,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { getDocs, getFirestore, collection, doc } from "firebase/firestore";
 import { UserModel } from "../models/user";
 
 class Firestore {
