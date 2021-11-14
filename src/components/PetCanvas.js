@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Canvas from "./Canvas";
 
 // Import way too many images
@@ -18,6 +19,8 @@ import Pet from "../pet/Pet";
 function PetCanvas(props) {
   const [images, setImages] = useState();
   const [pet, setPet] = useState();
+
+  const happiness = useSelector((state) => state.pet.happiness);
 
   const buildImages = () => {
     const imgs = {
@@ -80,6 +83,14 @@ function PetCanvas(props) {
 
     setPet(new Pet({ x: window.innerWidth / 2, y: 400, images: imgs }));
   }, []);
+
+  // Update pet object to have happiness
+  useEffect(() => {
+    setPet((prevPet) => {
+      prevPet.setHappiness(happiness);
+      return prevPet;
+    });
+  }, [happiness]);
 
   // Set canvas to be fullscreen
   const canvasWidth = window.innerWidth;

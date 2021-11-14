@@ -3,7 +3,9 @@ class Pet {
     this.x = x;
     this.y = y;
     this.images = images;
-    this.mood = "happy";
+
+    this.happiness = 0;
+    this.mood = "neutral";
     this.walkAnimTimer = 0;
 
     this.spawnPoint = { x, y };
@@ -15,7 +17,7 @@ class Pet {
       idle: {
         action: "idle",
         timer: 0,
-        min: 60,
+        min: 30,
         max: 300,
         currentMax: 100,
         nextActions: ["walk", "hop"],
@@ -29,14 +31,15 @@ class Pet {
         nextActions(actionData) {
           if (this.mood === "happy") {
             return Math.random() > 0.5 ? "hop" : "idle";
+          } else {
+            return "idle";
           }
-          else { return "idle" }
         },
         currentData: {
           direction: 1,
         },
         onInit(actionData) {
-          this.randomWalk(actionData)
+          this.randomWalk(actionData);
         },
       },
       hop: {
@@ -52,12 +55,12 @@ class Pet {
           this.ySpeed = -5;
           this.gravity = 0.4;
           this.originalY = this.y;
-          this.randomWalk(actionData)
+          this.randomWalk(actionData);
         },
         onComplete(actionData) {
           this.y = this.originalY;
-        }
-      }
+        },
+      },
     };
     this.currentAction = this.actions.idle;
 
@@ -157,7 +160,6 @@ class Pet {
     }
 
     this.move(walkDirection, this.ySpeed);
-    
   }
 
   // Stand still
@@ -167,6 +169,13 @@ class Pet {
 
   moodImages() {
     return this.images[this.mood];
+  }
+
+  setHappiness(happiness) {
+    this.happiness = happiness;
+    if (this.happiness >= 2) {
+      this.mood = "happy";
+    }
   }
 }
 
