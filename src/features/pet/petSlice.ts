@@ -1,4 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
+import { PetModel } from "../../models/pet";
 
 export const petSlice = createSlice({
   name: "pet",
@@ -13,6 +15,7 @@ export const petSlice = createSlice({
     incrementHappiness: (state) => {
       state.happiness += 1;
       state.lastTrigger = "incrementHappiness";
+      state.currentProgress += 1;
     },
     decrementHappiness: (state) => {
       state.happiness -= 1;
@@ -30,10 +33,23 @@ export const petSlice = createSlice({
     clearLastTrigger: (state) => {
       state.lastTrigger = null;
     },
+    load: (state, action: PayloadAction<PetModel>) => {
+      state.lastTrigger = "incrementHappiness";
+      state.happiness = action.payload.happiness;
+      state.currentProgress = action.payload.currentProgress;
+    },
   },
 });
 
-export const { incrementHappiness, decrementHappiness, incrementProgress, setHappiness, clearLastTrigger } =
-  petSlice.actions;
+export const {
+  incrementHappiness,
+  decrementHappiness,
+  incrementProgress,
+  setHappiness,
+  clearLastTrigger,
+  load,
+} = petSlice.actions;
+
+export const selectPet = (state: RootState) => state.pet;
 
 export default petSlice.reducer;

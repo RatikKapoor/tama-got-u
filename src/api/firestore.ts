@@ -37,7 +37,8 @@ class Firestore {
     try {
       const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
       await updateDoc(userRef, {
-        u,
+        "preferred-activities": u["preferred-activities"],
+        pet: u.pet,
       });
     } catch (e) {
       console.error(e);

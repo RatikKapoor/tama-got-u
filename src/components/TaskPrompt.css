@@ -1,0 +1,13 @@
+.task-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.white-text {
+  color: white;
+}
+
+.prompt-time {
+  padding-bottom: 20px;
+}

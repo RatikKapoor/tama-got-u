@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { incrementHappiness, decrementHappiness } from "../features/pet/petSlice";
 import { Stack, Button, Typography } from '@mui/material';
 import { SingleTaskModel } from "../models/singleTask";
+import "./TaskPrompt.css"
 
 interface TaskPromptProps {
     task?: SingleTaskModel;
@@ -27,15 +28,14 @@ const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
     }
 
     return (
-        <div>
-            <h1>{props.task && props.task.task}</h1>
-            <Typography variant="body1">time: {props.task && props.task.nextTime && props.task.nextTime.toDate().toLocaleTimeString()}</Typography>
+        <div className="task-prompt">
+            <h1 className="white-text">Task: {props.task && props.task.task}</h1>
+            <Typography variant="body1" className="white-text prompt-time">
+                Time: {props.task && props.task.nextTime && props.task.nextTime.toDate().toLocaleTimeString()}
+            </Typography>
             <Stack spacing={2} direction="row">
-                {/* <Button variant="outlined" onClick={() => {
-                    alert('Here we should open the event editor!');
-                }}>Edit</Button> */}
-                <Button variant="outlined" onClick={removeSelf} style={{color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2}}>Dismiss</Button>
-                <Button variant="outlined" onClick={onDoneTask} style={{color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2}}>✓ Done</Button>
+                <Button variant="outlined" onClick={onDismissTask} style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }}>Dismiss</Button>
+                <Button variant="outlined" onClick={onDoneTask} style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }}>✓ Done</Button>
             </Stack>
         </div>
     );

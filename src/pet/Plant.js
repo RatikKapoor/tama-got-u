@@ -13,12 +13,15 @@ class Plant {
       this.growth++;
     }
 
-    if (this.growth == 0) {
+    if (this.growth === 0) {
       this.image = this.images.stem[0];
-    } else if (this.growth == 1) {
+    } else if (this.growth === 1) {
       this.image = this.images.stem[1];
-    } else if (this.growth == 2) {
-      this.image = this.images.flower[Math.floor(Math.random() * this.images.flower.length)];
+    } else if (this.growth === 2) {
+      this.image =
+        this.images.flower[
+          Math.floor(Math.random() * this.images.flower.length)
+        ];
     }
   }
 
