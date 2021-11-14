@@ -8,6 +8,8 @@ import { initializeApp } from "firebase/app";
 import Firestore from "./api/firestore";
 import { UserModel } from "./models/user";
 import HomeScreen from "./screens/HomeScreen";
+import { useAppDispatch } from "./app/hooks";
+import { load } from "./features/pet/petSlice";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -25,11 +27,16 @@ const firebaseConfig = {
 function App() {
   const [user, setUser] = useState<undefined | UserModel>();
   const [firestore, setFirestore] = useState<Firestore | undefined>();
+  const dispatch = useAppDispatch();
 
   const loadUsers = async () => {
     const fireStore = new Firestore()
     setFirestore(fireStore);
     const temp = (await fireStore.getUser()) as UserModel;
+    dispatch(load({
+      currentProgress: temp.pet.currentProgress,
+      happiness: temp.pet.happiness
+    }))
     setUser(temp);
   };
 

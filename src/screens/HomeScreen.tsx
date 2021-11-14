@@ -10,6 +10,9 @@ import { UserModel } from '../models/user';
 import _ from "lodash";
 import "./HomeScreen.css"
 import { Timestamp } from '@firebase/firestore';
+import { PetModel } from '../models/pet';
+import { useSelector } from 'react-redux';
+import { selectPet } from '../features/pet/petSlice';
 
 interface HomeScreenProps {
   user?: UserModel;
@@ -22,6 +25,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
   const [activeTask, setActiveTask] = useState<SingleTaskModel | undefined>();
   const [showActivitySettingsModal, setShowActivitySettingsModal] = useState<boolean>(false);
   const [activitySettingsModalTask, setActivitySettingsModalTask] = useState<SingleTaskModel | undefined>();
+  const petData = useSelector(selectPet);
 
   useEffect(() => {
     if (!props.user) return;
@@ -91,6 +95,17 @@ const HomeScreen: React.FC<HomeScreenProps> = (props: HomeScreenProps) => {
     props.updateUser(newUser);
     props.firestore.updateUser(newUser);
   }
+
+  useEffect(() => {
+    if (!props.user) return;
+    let newUser: UserModel = _.cloneDeep(props.user);
+    newUser.pet = {
+      currentProgress: petData.currentProgress,
+      happiness: petData.happiness
+    };
+    props.updateUser(newUser);
+    props.firestore.updateUser(newUser);
+  }, [petData])
 
   const toggleShowTaskList = () => setShowTaskList(!showTaskList);
 

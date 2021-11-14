@@ -34,7 +34,7 @@ const TaskPrompt: React.FC<TaskPromptProps> = (props: TaskPromptProps) => {
                 Time: {props.task && props.task.nextTime && props.task.nextTime.toDate().toLocaleTimeString()}
             </Typography>
             <Stack spacing={2} direction="row">
-                <Button variant="outlined" onClick={removeSelf} style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }}>Dismiss</Button>
+                <Button variant="outlined" onClick={onDismissTask} style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }}>Dismiss</Button>
                 <Button variant="outlined" onClick={onDoneTask} style={{ color: '#FFFFFF', borderColor: '#FFFFFF', borderBlockWidth: 2 }}>✓ Done</Button>
             </Stack>
         </div>
