@@ -25,7 +25,12 @@ class Firestore {
 
   public async getUser(): Promise<UserModel> {
     const userSnapshot = await this.getUsers();
-    return userSnapshot[0];
+    let user = userSnapshot[0];
+    user["preferred-activities"] = user["preferred-activities"].sort(
+      (a, b) => a.nextTime.seconds - b.nextTime.seconds
+    );
+    console.log("Sorted user", user);
+    return user;
   }
 
   public async updateUser(u: UserModel) {
