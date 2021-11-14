@@ -5,6 +5,7 @@ import { SingleTaskModel } from "../models/singleTask";
 
 interface TaskListProps {
   data: SingleTaskModel[];
+  setAndShowActivitySettingsModal: (x: SingleTaskModel) => void;
 }
 
 const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
@@ -12,7 +13,11 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
     <List>
       {props.data &&
         props.data.map((v, k) => {
-          return <SingleTask key={k} task={v.task} nextTime={v.nextTime} />;
+          return <SingleTask
+            key={k}
+            task={v}
+            setAndShowActivitySettingsModal={props.setAndShowActivitySettingsModal}
+          />;
         })}
     </List>
   );

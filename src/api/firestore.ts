@@ -34,10 +34,14 @@ class Firestore {
   }
 
   public async updateUser(u: UserModel) {
-    const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
-    await updateDoc(userRef, {
-      u,
-    });
+    try {
+      const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
+      await updateDoc(userRef, {
+        u,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
 
