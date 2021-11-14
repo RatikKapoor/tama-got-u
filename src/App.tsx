@@ -48,7 +48,7 @@ function App() {
             <TaskList data={user && user["preferred-activities"]} />
           </div>
           <TaskPrompt />
-          <TopThree />
+          <TopThree data={user && user["preferred-activities"]} />
         </Route>
       </Switch>
     </Router>

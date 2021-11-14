@@ -1,14 +1,17 @@
+import React, { useEffect, useState } from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
-import React from "react";
+import { SingleTaskProps } from "./SingleTask";
 
-function TopThree(){
-const top_three = ["Let's Take a Walk!", "Grab a Drink of Water.", "Say Hi to //TODO"]
+interface TopThreeProps {
+    data?: SingleTaskProps[];
+}
 
-    return(
-        <List sx={{width: '100%', maxWidth: 360, bgcolor: 'white', borderRadius: '16px'}}>
-            {top_three.map((v,k)=>{
-                return(<ListItem key={k}>
-                    <ListItemText primary = {v} />
+const TopThree: React.FC<TopThreeProps> = (props: TopThreeProps) => {
+    return (
+        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'white', borderRadius: '16px' }}>
+            {props.data && props.data.slice(0, 3).map((v, k) => {
+                return (<ListItem key={k}>
+                    <ListItemText primary={v.task} />
                 </ListItem>)
             }
             )}

@@ -34,8 +34,10 @@ class Firestore {
   }
 
   public async updateUser(u: UserModel) {
-    // const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
-    // await updateDoc(userRef, u);
+    const userRef = doc(this.db, "users", "apfsg3MRcUdbJgA6KJgP");
+    await updateDoc(userRef, {
+      u,
+    });
   }
 }
 
