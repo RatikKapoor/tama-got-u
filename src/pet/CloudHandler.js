@@ -2,6 +2,7 @@ class Cloud {
   constructor(x, y, image, big = false) {
     this.x = x;
     this.y = y;
+    this.xSpeed = Math.random() * 2;
     this.image = image;
     this.big = big;
   }
@@ -12,6 +13,14 @@ class Cloud {
     } else {
       ctx.drawImage(this.image, this.x, this.y, 512, 128);
     }
+  }
+
+  update() {
+    if (this.x > window.innerWidth) {
+      this.x = -200;
+    }
+
+    this.x += this.xSpeed;
   }
 }
 
@@ -43,11 +52,7 @@ class CloudHandler {
 
   update() {
     this.clouds.forEach((c) => {
-      if (c.x > window.innerWidth) {
-        c.x = -200;
-      }
-
-      c.x++;
+      c.update();
     });
   }
 
