@@ -1,5 +1,5 @@
 import React from "react";
-import { List } from "@mui/material";
+import { List, Paper } from "@mui/material";
 import SingleTask from "./SingleTask";
 import { SingleTaskModel } from "../models/singleTask";
 
@@ -10,6 +10,7 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
   return (
+    <Paper style={{maxHeight: 300, overflow: 'auto'}}>
     <List>
       {props.data &&
         props.data.map((v, k) => {
@@ -20,6 +21,8 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
           />;
         })}
     </List>
+    </Paper>
+
   );
 };
 
